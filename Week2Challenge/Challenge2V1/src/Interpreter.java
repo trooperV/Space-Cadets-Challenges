@@ -19,9 +19,9 @@ public class Interpreter {
 	BufferedReader br;
 	int numberOfLines;
 	
-	String clearV = "(^| )clear (.+);";
-	String incrV = "(^| )incr (.+);";
-	String decrV = "(^| )decr (.+);";
+	String clearV = "(^|)clear (.+);";
+	String incrV = "(^|)incr (.+);";
+	String decrV = "(^|)decr (.+);";
 	String whileS = "while (.) not ([0-9]+) do(;)";
 	String endS = "end;";
 	Pattern c = Pattern.compile(clearV);
@@ -49,41 +49,64 @@ public class Interpreter {
 		boolean shouldBr = false;
 		for (int j = 0; j < lines.size(); j++) {
 			m = c.matcher(lines.get(j));
-			if(m.find()) variables.putIfAbsent(m.group(2), 0);
+			if(m.find()) {
+				variables.putIfAbsent(m.group(2), 0);
+				System.out.println("Init V: " + m.group(2) + "=0");
+			}
 			
 			m = i.matcher(lines.get(j));
-			if(m.find()) variables.put(m.group(2), variables.get(m.group(2)).intValue()+1);
+			if(m.find()) {
+				variables.put(m.group(2), variables.get(m.group(2)).intValue()+1);
+				System.out.println("Variable: " + m.group(2) + "=" + (variables.get(m.group(2))-1)+ "; " + m.group(2) + "++ ->" + variables.get(m.group(2)));
+			}
 			
 			m = d.matcher(lines.get(j));
-			if(m.find()) variables.put(m.group(2), variables.get(m.group(2)).intValue()-1);
-			
+			if(m.find()) {
+				variables.put(m.group(2), variables.get(m.group(2)).intValue()-1);
+				System.out.println("Variable: " + m.group(2) + "=" + (variables.get(m.group(2))+1)+ "; " + m.group(2) + "-- ->" + variables.get(m.group(2)));
+			}
+
 			//fix this
-			shouldBr = false;
+			//shouldBr = false;
+			int fakeWhileC = 0;
 			m = s.matcher(lines.get(j));
 			if(m.find()) {
 				whileLoops.push(new WhileSet(m.group(1), Integer.parseInt(m.group(2)), j));
+				System.out.println("pushing while: " + whileLoops.peek().getVaribale() + " = " + variables.get(whileLoops.peek().getVaribale()) + "; while " + whileLoops.peek().getVaribale() + " not " + whileLoops.peek().getValue() + " :" + (whileLoops.peek().getLineNumber()+1));
 				if(whileLoops.peek().getValue() == variables.get(whileLoops.peek().getVaribale())) {
-					m = e.matcher(lines.get(j));
-					for (int i = j; i < lines.size(); i++) {
+					for (int i = j+1; i < lines.size(); i++) {
+						m = s.matcher(lines.get(i));
+						if(m.find()) {
+							fakeWhileC++;
+						}
+						
 						m = e.matcher(lines.get(i));
 						if(m.find()) {
-							j = i;
-							whileLoops.pop();
-							shouldBr = true;
-							break;
+							if(fakeWhileC == 0) {
+								j = i;
+								System.out.println("popping " + (whileLoops.peek().getLineNumber()+1) + " - " + whileLoops.peek().getVaribale() + " " + whileLoops.peek().getValue());
+								whileLoops.pop();
+								//shouldBr = true;
+								break;
+							}
+							fakeWhileC--;
 						}
 					}
+					continue;
 				}
 			}
 			
-			if(shouldBr) break;
-			//if the while is done before even going into it it will loop forever - fix this (not anymore but still buggy).
+			//if(shouldBr) break;
+			//if the while is done before even going into it it will loop forever - fix this
 			
 			m = e.matcher(lines.get(j));
 			if(m.find()) {
+				//System.out.println(whileLoops.peek().getVaribale() + " :" + variables.get(whileLoops.peek().getVaribale()) + ": " + whileLoops.peek().getLineNumber());
 				if(whileLoops.peek().getValue() != variables.get(whileLoops.peek().getVaribale())) {
+					System.out.println(whileLoops.peek().getVaribale() + "=" + variables.get(whileLoops.peek().getVaribale()) + " Line: " + (whileLoops.peek().getLineNumber()+1));
 					j = whileLoops.peek().getLineNumber();
 				}else {
+					System.out.println("popping " + (whileLoops.peek().getLineNumber()+1) + " - " + whileLoops.peek().getVaribale() + " " + whileLoops.peek().getValue());
 					whileLoops.pop();
 				}
 			}
