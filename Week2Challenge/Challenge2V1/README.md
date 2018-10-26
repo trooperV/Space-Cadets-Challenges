@@ -4,4 +4,4 @@
 
 <h3> Things to work on: </h3>
 	<li>Implement if/else</li>
-	<li>Implement comments>/li>
+	<li>Implement comments</li>
