@@ -1,4 +1,4 @@
 # Bare Bones Interpreter
-<h3>Syntaxis<h3>
+Syntaxis
 
 Use `clear varName;` to initialize a variable and set it's value to 0
