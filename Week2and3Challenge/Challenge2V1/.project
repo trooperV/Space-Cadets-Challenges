@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>Challenge2V1</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>org.eclipse.jdt.core.javabuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>org.eclipse.jdt.core.javanature</nature>
+	</natures>
+	<linkedResources>
+		<link>
+			<name>program1.bb</name>
+			<type>1</type>
+			<location>/home/trooperv/Documents/Programming/Java/Eclipsews/Challenge2V1/program1.bb</location>
+		</link>
+		<link>
+			<name>program2.bb</name>
+			<type>1</type>
+			<location>/home/trooperv/Documents/Programming/Java/Eclipsews/Challenge2V1/program2.bb</location>
+		</link>
+	</linkedResources>
+</projectDescription>

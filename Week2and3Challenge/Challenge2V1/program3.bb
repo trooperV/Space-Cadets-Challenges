@@ -1,0 +1,14 @@
+clear X;
+incr X;
+incr X;
+incr X;
+while X not 0 do;
+   decr X;
+end;
+clear Z;
+incr Z;
+if Z > X do;
+    if Z <= X do;
+    incr X;
+    endif;
+endif;
