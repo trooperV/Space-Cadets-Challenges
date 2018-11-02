@@ -11,3 +11,11 @@
 1. Initializing variables and changing their values.
 2. While loops. Work like regular __while loops__ but there is no implementation for __varName__ support instead of the __intValue__. Nesting works fine.
 3. __If statements__. Nesting works fine. There is no implementation of __else__ yet.
+
+  ### Programs 1, 2 and 3
+1. `program1.bb` tests the functionality of the __while loop__
+2. `program2.bb` multiplication of __2__ numbers, currently __7__ and __5__
+3. `program3.bb` tests the functionality of the __if statement__
+  
+  ### How to use
+  In order to run a program just specify its source file. The `bb` file will be printed on the screen, followed by every instruction from execution to end. On the final __n__ lines will be printed the names and values of the __n__ variables that were initialized during execution.
