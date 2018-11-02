@@ -18,4 +18,4 @@
 3. `program3.bb` tests the functionality of the __if statement__
   
   ### How to use
-  In order to run a program just specify its source file. The `bb` file will be printed on the screen, followed by every instruction from execution to end. On the final __n__ lines will be printed the names and values of the __n__ variables that were initialized during execution.
+  In order to run a program just specify its source file. The `bb` file will be printed on the screen, followed by every instruction from execution to end (currently __if__ instructions do not show up on the instruction log). On the final __n__ lines will be printed the names and values of the __n__ variables that were initialized during execution.
